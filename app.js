@@ -13,7 +13,11 @@ app.get("/tags", async function(req, res, next) {
 app.get("/messages", async function(req, res, next) {
   // get all the messages and tags
   const message_and_tags = await db.query(
-    "SELECT m.id,m.text, t.name FROM messages m JOIN messages_tags mt ON m.id=mt.message_id JOIN tags t ON mt.tag_id = t.id ORDER BY m.id"
+    `SELECT m.id, m.text, t.name 
+     FROM messages m 
+       JOIN messages_tags mt ON m.id=mt.message_id 
+       JOIN tags t ON mt.tag_id = t.id 
+     ORDER BY m.id`
   );
 
   // map over the original messages and add a property for each one
